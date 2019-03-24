@@ -3,9 +3,18 @@ const ALL_HIRAGANA = {
   'i': 'い',
   'u': 'う',
   'e': 'え',
-  'o': 'お'
+  'o': 'お',
+
+  'ka': 'か',
+  'ki': 'き',
+  'ku': 'く',
+  'ke': 'け',
+  'ko': 'こ',
 }
-const ALL_ROMAJI = ['a', 'i', 'u', 'e', 'o']
+const ALL_ROMAJI = [
+  'a', 'i', 'u', 'e', 'o',
+  'ka', 'ki', 'ku', 'ke', 'ko'
+]
 let all_choices = document.querySelectorAll('.multiple-choice div')
 let current_hiragana = document.querySelector('.hiragana span')
 const random_character = ()=> ALL_ROMAJI[Math.floor(Math.random() * ALL_ROMAJI.length)]
@@ -22,6 +31,7 @@ for(let i=0; i<all_choices.length; i++){
     }
     else {
       bg_color('#E8DF00', '#DE4F41')
+      return
     }
     // get random hiragana and display it
     do {
