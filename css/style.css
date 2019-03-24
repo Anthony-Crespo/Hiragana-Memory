@@ -1,3 +1,44 @@
 :root {
   background: #DE4F41;
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.hiragana span {
+  font-size: 15rem;
+}
+
+.multiple-choice {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+}
+
+.multiple-choice div {
+  border: solid white 8px ;
+  padding: 0.3em;
+}
+
+.multiple-choice div:hover {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.multiple-choice div:nth-child(n+2) {
+  margin-left: 1.5em;
+}
+
+.multiple-choice span {
+  font-size: 6em;
 }
