@@ -9,14 +9,19 @@ const ALL_ROMAJI = ['a', 'i', 'u', 'e', 'o']
 let all_choices = document.querySelectorAll('.multiple-choice div')
 let current_hiragana = document.querySelector('.hiragana span')
 const random_character = ()=> ALL_ROMAJI[Math.floor(Math.random() * ALL_ROMAJI.length)]
+const bg_color = (from,to) => {
+  page = document.querySelector('html')
+  page.style.backgroundColor  = from;
+  setTimeout(() => page.style.backgroundColor  = to, 500);
+}
 
 for(let i=0; i<all_choices.length; i++){
   all_choices[i].addEventListener('click', function (e) {
     if (ALL_HIRAGANA[e.target.textContent] === current_hiragana.textContent) {
-      alert('Correct answer!')
+      bg_color('#36AA48', '#DE4F41')
     }
     else {
-      alert('Wrong answer!')
+      bg_color('#E8DF00', '#DE4F41')
     }
     // get random hiragana and display it
     do {
