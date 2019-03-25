@@ -38,15 +38,18 @@ const bg_color = (from,to) => {
   setTimeout(() => page.style.backgroundColor  = to, 500);
 }
 let display_char = ['_', 'a', 'ko']
+let streak = 0
 
 for(let i=0; i<all_choices.length; i++){
   all_choices[i].addEventListener('click', function (e) {
-
     if (ALL_HIRAGANA[e.target.textContent] === current_hiragana.textContent) {
       bg_color('#36AA48', '#DE4F41')
+      streak++
     }
     else {
       bg_color('#FCEB22', '#DE4F41')
+      console.log('Ending streak of: ' + streak)
+      streak = 0
       return
     }
     // generate next preview (random)
@@ -54,7 +57,10 @@ for(let i=0; i<all_choices.length; i++){
       display_char.shift()
       do {
         display_char.push(random_character())
-      } while (ALL_HIRAGANA[display_char[2]] === current_hiragana.textContent)
+        if (display_char[1] === display_char[2]) {
+          display_char.pop()
+        }
+      } while (display_char.length !== 3)
       // display next char
       current_hiragana.textContent = ALL_HIRAGANA[display_char[1]]
       // get romaji of current hiragana and two other random
