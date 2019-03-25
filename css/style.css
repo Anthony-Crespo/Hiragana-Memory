@@ -53,3 +53,14 @@ h1 {
 .multiple-choice span {
   font-size: 6em;
 }
+
+.alert {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(252, 234, 34, 0.85);
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 0.5em;
+}

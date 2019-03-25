@@ -11,43 +11,55 @@ const ALL_HIRAGANA = {
   'ke': 'け',
   'ko': 'こ',
 
-  'sa': 'さ', 
-  'shi': 'し', 
-  'su': 'す', 
-  'se': 'せ', 
+  'sa': 'さ',
+  'shi': 'し',
+  'su': 'す',
+  'se': 'せ',
   'so': 'そ',
 
-  'ta': 'た', 
+  'ta': 'た',
   'chi': 'ち', 
   'tsu': 'つ', 
   'te': 'て', 
-  'to': 'と'
+  'to': 'と',
+
+  'na': 'な',
+  'ni': 'に',
+  'nu': 'ぬ',
+  'ne': 'ね',
+  'no': 'の'
 }
 const ALL_ROMAJI = [
   'a', 'i', 'u', 'e', 'o',
   'ka', 'ki', 'ku', 'ke', 'ko',
   'sa', 'shi', 'su', 'se', 'so',
-  'ta', 'chi', 'tsu', 'te', 'to'
+  'ta', 'chi', 'tsu', 'te', 'to',
+  'na', 'ni', 'nu', 'ne', 'no'
 ]
 let all_choices = document.querySelectorAll('.multiple-choice div')
 let current_hiragana = document.querySelector('.hiragana span')
-const random_character = ()=> ALL_ROMAJI[Math.floor(Math.random() * ALL_ROMAJI.length)]
+const random_character = () => ALL_ROMAJI[Math.floor(Math.random() * ALL_ROMAJI.length)]
 const bg_color = (from,to) => {
   page = document.querySelector('html')
   page.style.backgroundColor  = from;
   setTimeout(() => page.style.backgroundColor  = to, 500);
 }
-let display_char = ['_', 'a', 'ko']
+const alert_wrong_answer = (romaji, hiragana) => document.querySelector('.alert span')
+  .textContent = `"${romaji}" hiragana is ${hiragana}`
+let display_char = ['', 'a', 'ko']
 let streak = 0
 
 for(let i=0; i<all_choices.length; i++){
   all_choices[i].addEventListener('click', function (e) {
     if (ALL_HIRAGANA[e.target.textContent] === current_hiragana.textContent) {
       bg_color('#36AA48', '#DE4F41')
+      document.querySelector('.alert').style.display = 'none'
       streak++
     }
     else {
       bg_color('#FCEB22', '#DE4F41')
+      alert_wrong_answer(e.target.textContent, ALL_HIRAGANA[e.target.textContent])
+      document.querySelector('.alert').style.display = 'block'
       console.log('Ending streak of: ' + streak)
       streak = 0
       return
