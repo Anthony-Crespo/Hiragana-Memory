@@ -10,10 +10,24 @@ const ALL_HIRAGANA = {
   'ku': 'く',
   'ke': 'け',
   'ko': 'こ',
+
+  'sa': 'さ', 
+  'shi': 'し', 
+  'su': 'す', 
+  'se': 'せ', 
+  'so': 'そ',
+
+  'ta': 'た', 
+  'chi': 'ち', 
+  'tsu': 'つ', 
+  'te': 'て', 
+  'to': 'と'
 }
 const ALL_ROMAJI = [
   'a', 'i', 'u', 'e', 'o',
-  'ka', 'ki', 'ku', 'ke', 'ko'
+  'ka', 'ki', 'ku', 'ke', 'ko',
+  'sa', 'shi', 'su', 'se', 'so',
+  'ta', 'chi', 'tsu', 'te', 'to'
 ]
 let all_choices = document.querySelectorAll('.multiple-choice div')
 let current_hiragana = document.querySelector('.hiragana span')
@@ -23,35 +37,45 @@ const bg_color = (from,to) => {
   page.style.backgroundColor  = from;
   setTimeout(() => page.style.backgroundColor  = to, 500);
 }
+let display_char = ['_', 'a', 'ko']
 
 for(let i=0; i<all_choices.length; i++){
   all_choices[i].addEventListener('click', function (e) {
+
     if (ALL_HIRAGANA[e.target.textContent] === current_hiragana.textContent) {
       bg_color('#36AA48', '#DE4F41')
     }
     else {
-      bg_color('#E8DF00', '#DE4F41')
+      bg_color('#FCEB22', '#DE4F41')
       return
     }
-    // get random hiragana and display it
-    do {
-      var random = random_character()
-    } while (ALL_HIRAGANA[random] === current_hiragana.textContent)
-    current_hiragana.textContent = ALL_HIRAGANA[random]
-    // get romaji of current hiragana and two other random
-    let random_romaji = [random]
-    while (random_romaji.length !== 3) {
-      let unused_romaji = random_character()
-      if (!random_romaji.includes(unused_romaji)) {
-        random_romaji.push(unused_romaji)
+    // generate next preview (random)
+    setTimeout(() => {
+      display_char.shift()
+      do {
+        display_char.push(random_character())
+      } while (ALL_HIRAGANA[display_char[2]] === current_hiragana.textContent)
+      // display next char
+      current_hiragana.textContent = ALL_HIRAGANA[display_char[1]]
+      // get romaji of current hiragana and two other random
+      let random_romaji = [display_char[1]]
+      while (random_romaji.length !== 3) {
+        let unused_romaji = random_character()
+        if (!random_romaji.includes(unused_romaji)) {
+          random_romaji.push(unused_romaji)
+        }
       }
-    }
-    // replace the current romaji choices randomly with new 3
-    romaji_choices = document.querySelectorAll('.multiple-choice div span')
-    for (let choice of romaji_choices) {
-      let index = Math.floor(Math.random() * random_romaji.length)
-      choice.textContent = random_romaji[index]
-      random_romaji.splice(index, 1)
-    }
+      // replace the 3 current romaji choices randomly
+      romaji_choices = document.querySelectorAll('.multiple-choice div span')
+      for (let choice of romaji_choices) {
+        let index = Math.floor(Math.random() * random_romaji.length)
+        choice.textContent = random_romaji[index]
+        random_romaji.splice(index, 1)
+      // update preview
+      preview_spans = document.querySelectorAll('.preview span')
+      preview_spans[0].textContent = ALL_HIRAGANA[display_char[0]]
+      preview_spans[1].textContent = ALL_HIRAGANA[display_char[2]]
+      }
+    }, 501)
   });
 }
