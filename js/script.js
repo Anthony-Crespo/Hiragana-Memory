@@ -27,14 +27,47 @@ const ALL_HIRAGANA = {
   'ni': 'に',
   'nu': 'ぬ',
   'ne': 'ね',
-  'no': 'の'
+  'no': 'の',
+
+  'ha': 'は', 
+  'hi': 'ひ', 
+  'fu': 'ふ', 
+  'he': 'へ', 
+  'ho': 'ほ',
+
+  'ma': 'ま', 
+  'mi': 'み', 
+  'mu': 'む', 
+  'me': 'め', 
+  'mo': 'も', 
+
+  'ya': 'や', 
+  'yu': 'ゆ', 
+  'yo': 'よ', 
+
+  'ra': 'ら', 
+  'ri': 'り', 
+  'ru': 'る', 
+  're': 'れ', 
+  'ro': 'ろ', 
+
+  'wa': 'わ', 
+  'wo': 'を', 
+
+  'n': 'ん'
 }
 const ALL_ROMAJI = [
   'a', 'i', 'u', 'e', 'o',
   'ka', 'ki', 'ku', 'ke', 'ko',
   'sa', 'shi', 'su', 'se', 'so',
   'ta', 'chi', 'tsu', 'te', 'to',
-  'na', 'ni', 'nu', 'ne', 'no'
+  'na', 'ni', 'nu', 'ne', 'no',
+  'ha', 'hi', 'fu', 'he', 'ho',
+  'ma', 'mi', 'mu', 'me', 'mo',
+  'ya', 'yu', 'yo',
+  'ra', 'ri', 'ru', 're', 'ro',
+  'wa', 'wo',
+  'n'
 ]
 let all_choices = document.querySelectorAll('.multiple-choice div')
 let current_hiragana = document.querySelector('.hiragana span')
